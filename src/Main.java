@@ -8,7 +8,11 @@ public class Main {
                 bankAccount.withDraw(6000);
             } catch (LimitException e) {
                 System.out.println(e.getMessage());
-                bankAccount.withDraw((int) bankAccount.getAmount());
+                try {
+                    bankAccount.withDraw((int) bankAccount.getAmount());
+                } catch (LimitException ex) {
+                    throw new RuntimeException(ex);
+                }
                 break;
             }
         }
